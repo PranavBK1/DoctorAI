@@ -1,18 +1,17 @@
 import streamlit as st
 from load_model import ask_ai
 
-st.set_page_config(page_title="AI Medical Symptom Checker", page_icon="🩺")
+st.title("🧬 Doctor AI Assistant (BioGPT Version)")
+st.write("Describe your symptoms to receive a possible medical insight.")
 
-st.title("🩺 AI Medical Symptom Checker")
-st.write("Describe your symptoms below and get a likely medical condition in response.")
+symptoms = st.text_area("Enter your symptoms here")
 
-symptoms = st.text_area("Describe your symptoms here:", height=150)
-
-if st.button("Get Diagnosis"):
+if st.button("Analyze"):
     if symptoms.strip():
-        with st.spinner("Analyzing your symptoms..."):
-            diagnosis = ask_ai(symptoms)
-        st.success("Likely Condition:")
-        st.write(diagnosis)
+        with st.spinner("Thinking..."):
+            response = ask_ai(symptoms)
+        st.success("Here's what BioGPT thinks:")
+        st.write(response)
     else:
-        st.error("Please enter your symptoms before submitting.")
+        st.error("Please enter some symptoms.")
+
